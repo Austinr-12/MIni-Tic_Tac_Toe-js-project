@@ -13,3 +13,12 @@ function printBoard() {
     ${gameBoard[6]} | ${gameBoard[7]} | ${gameBoard[8]}
   `);
 }
+
+function handleMove (position) {
+  if (gameBoard[position] == " "){
+    gameBoard[position] = currentPlayer;
+  } else {
+    console.log("Cell already taken, choose another one.");
+    return false;
+  }
+}
