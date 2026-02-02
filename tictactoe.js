@@ -30,3 +30,9 @@ if (checkWin()) {
   return true;
 }
 
+if (gameBoard.every((cell) => cell !== " ")) {
+  printBoard();
+  console.log("It's a draw!");
+  gameActive = false;
+  return true;
+}
