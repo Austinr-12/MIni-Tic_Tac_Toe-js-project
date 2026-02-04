@@ -61,3 +61,14 @@ function checkWin() {
     );
   });
 }
+
+while (gameActive) {
+  printBoard();
+  const position = prompt('Player ${currentPlayer}, enter your move (0-8): ');
+
+  if (position >= 0 && position <= 8) {
+    handleMove(parseInt(position));
+  } else {
+    console.log("Invalid position, enter a number between 0 and 8.");
+  }
+}
