@@ -1,44 +1,43 @@
-const prompt = require("prompt-sync")();
+const prompt = require('prompt-sync')();
 
-let gameBoard = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
 let currentPlayer = "🐐";
-let gameActive = true;
+let active = true;
 
 function printBoard() {
   console.log(`
-    ${gameBoard[0]} | ${gameBoard[1]} | ${gameBoard[2]}
+    ${board[0]} | ${board[1]} | ${board[2]}
     ---------
-    ${gameBoard[3]} | ${gameBoard[4]} | ${gameBoard[5]}
+    ${board[3]} | ${board[4]} | ${board[5]}
     ---------
-    ${gameBoard[6]} | ${gameBoard[7]} | ${gameBoard[8]}
+    ${board[6]} | ${board[7]} | ${board[8]}
   `);
 }
 
-function handleMove (position) {
-  if (gameBoard[position] == " "){
-    gameBoard[position] = currentPlayer;
+function handleMove(position) {
+  if (board[position] === " ") {
+    board[position] = currentPlayer;
   } else {
     console.log("Cell already taken, choose another one.");
     return false;
   }
 
+  if (checkWin()) {
+    printBoard();
+    console.log(`Player ${currentPlayer} wins!`);
+    active = false;
+    return true;
+  }
 
-if (checkWin()) {
-  printBoard();
-  console.log('player ${currentPlayer} wins!');
-  gameActive = false;
+  if (board.every(cell => cell !== " ")) {
+    printBoard();
+    console.log("It's a draw!");
+    active = false;
+    return true;
+  }
+
+  currentPlayer = currentPlayer === "🐐" ? "🍇" : "🐐";
   return true;
-}
-
-if (gameBoard.every((cell) => cell !== " ")) {
-  printBoard();
-  console.log("It's a draw!");
-  gameActive = false;
-  return true;
-}
-
-currentPlayer = currentPlayer === "🐐" ? "🍇" : "🐐";
-return true;
 }
 
 function checkWin() {
@@ -50,21 +49,18 @@ function checkWin() {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6],
+    [2, 4, 6]
   ];
-  return conditions.some((condition) => {
+
+  return conditions.some(condition => {
     const [a, b, c] = condition;
-    return (
-      gameBoard[a] === currentPlayer &&
-      gameBoard[b] === currentPlayer &&
-      gameBoard[c] === currentPlayer
-    );
+    return board[a] === currentPlayer && board[b] === currentPlayer && board[c] === currentPlayer;
   });
 }
 
-while (gameActive) {
+while (active) {
   printBoard();
-  const position = prompt('Player ${currentPlayer}, enter your move (0-8): ');
+  const position = prompt(`Player ${currentPlayer}, enter your move (0-8): `);
 
   if (position >= 0 && position <= 8) {
     handleMove(parseInt(position));
