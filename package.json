@@ -1,0 +1,24 @@
+{
+  "name": "mini-tic_tac_toe-js-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tictactoe.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Austinr-12/MIni-Tic_Tac_Toe-js-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Austinr-12/MIni-Tic_Tac_Toe-js-project/issues"
+  },
+  "homepage": "https://github.com/Austinr-12/MIni-Tic_Tac_Toe-js-project#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
