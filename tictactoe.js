@@ -21,7 +21,7 @@ function handleMove (position) {
     console.log("Cell already taken, choose another one.");
     return false;
   }
-}
+
 
 if (checkWin()) {
   printBoard();
@@ -35,4 +35,29 @@ if (gameBoard.every((cell) => cell !== " ")) {
   console.log("It's a draw!");
   gameActive = false;
   return true;
+}
+
+currentPlayer = currentPlayer === "🐐" ? "🍇" : "🐐";
+return true;
+}
+
+function checkWin() {
+  const conditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  return conditions.some((condition) => {
+    const [a, b, c] = condition;
+    return (
+      gameBoard[a] === currentPlayer &&
+      gameBoard[b] === currentPlayer &&
+      gameBoard[c] === currentPlayer
+    );
+  });
 }
